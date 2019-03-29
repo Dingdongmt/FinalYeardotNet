@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYPWebService", "FYPWebService\FYPWebService.csproj", "{85C5B16B-90D5-430D-9FD9-5EC0DF4DF642}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYPWebService.Tests", "FYPWebService.Tests\FYPWebService.Tests.csproj", "{ADB927AE-2030-43DD-BCF7-39D4FDDC1599}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85C5B16B-90D5-430D-9FD9-5EC0DF4DF642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C5B16B-90D5-430D-9FD9-5EC0DF4DF642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C5B16B-90D5-430D-9FD9-5EC0DF4DF642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C5B16B-90D5-430D-9FD9-5EC0DF4DF642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB927AE-2030-43DD-BCF7-39D4FDDC1599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB927AE-2030-43DD-BCF7-39D4FDDC1599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB927AE-2030-43DD-BCF7-39D4FDDC1599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB927AE-2030-43DD-BCF7-39D4FDDC1599}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB5E53F1-BAD4-44C7-95BF-4346CDF27623}
+	EndGlobalSection
+EndGlobal
