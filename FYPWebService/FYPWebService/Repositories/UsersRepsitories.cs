@@ -88,11 +88,12 @@ namespace FYPWebService.Repositories
                     var GroupName = String.Format("{0}", UserExist[6]);
                     var Address1 = String.Format("{0}", UserExist[7]);
                     var Address2 = String.Format("{0}", UserExist[8]);
-                    var Town = String.Format("{0}", UserExist[9]);
-                    var County = String.Format("{0}", UserExist[10]);
-                    var Country = String.Format("{0}", UserExist[11]);
-                    var PostCode = String.Format("{0}", UserExist[12]);
-                    object repobject= new { UserId,  Name ,  Admin , Bio, NickName, GroupId, GroupName ,  Address1, Address2,  Town ,  County,  Country ,  PostCode };
+                    var County = String.Format("{0}", UserExist[9]);
+                    var Country = String.Format("{0}", UserExist[10]);
+                    var PostCode = String.Format("{0}", UserExist[11]);
+                    var UserName = String.Format("{0}", UserExist[12]);
+                    var Password = String.Format("{0}", UserExist[13]);
+                    object repobject= new { UserId,  Name ,  Admin , Bio, NickName, GroupId, GroupName ,  Address1, Address2, County,  Country ,  PostCode, UserName,Password };
                     if (UserId != null)
                     {
                         connection.Close();
@@ -186,6 +187,73 @@ namespace FYPWebService.Repositories
                     repoArray.Add(user);
                 }
                 return repoArray;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static object GetPostDetails(PostDetails postDetails)
+        {
+            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
+                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+            var query = "SELECT * From [PostDetail] WHERE GroupId = '@GroupId'";
+            query = query.Replace("@GroupId", postDetails.GroupId);
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                ArrayList repoArray = new ArrayList();
+                SqlCommand command = new SqlCommand(query, connection);
+                var UserExist = command.ExecuteReader();
+                while (UserExist.Read())
+                {
+                    var UserId = String.Format("{0}", UserExist[0]);
+                    var GroupId = String.Format("{0}", UserExist[1]);
+                    var NickName = String.Format("{0}", UserExist[2]);
+                    var PostId = String.Format("{0}", UserExist[3]);
+                    var Container = String.Format("{0}", UserExist[4]);
+                    var SentTime = String.Format("{0}", UserExist[5]);
+                    var CommentId = String.Format("{0}", UserExist[6]);
+                    var CContainer = String.Format("{0}", UserExist[7]);
+                    var CSentTime = String.Format("{0}", UserExist[8]);
+                    var CCNickName = String.Format("{0}", UserExist[9]);
+                    object user = new { UserId, GroupId, NickName, PostId, Container, SentTime, CommentId, CContainer, CSentTime, CCNickName };
+                    repoArray.Add(user);
+                }
+                return repoArray;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public static object InsertPostPost(PostPost postPost)
+        {
+            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
+                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+            var query = "INSERT INTO [Post](UserId, Container, SentTime) VALUES('@UserId', '@Container', GETDATE())";
+            query = query.Replace("@UserId", postPost.UserId)
+                .Replace("@Container", postPost.Container);
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                // Check Error
+                command.ExecuteNonQuery();
+                connection.Close();
+                return "True";
             }
             catch (Exception)
             {

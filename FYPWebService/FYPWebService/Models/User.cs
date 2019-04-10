@@ -37,4 +37,15 @@ namespace FYPWebService.Models
     {
         public string GroupId { get; set; }
     }
+    //get group users
+    public class PostDetails
+    {
+        public string GroupId { get; set; }
+    }
+    //get post
+    public class PostPost
+    {
+        public string UserId { get; set; }
+        public string Container { get; set; }
+    }
 }

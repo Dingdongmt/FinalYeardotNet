@@ -63,5 +63,31 @@ namespace FYPWebService.Controllers
             }
             return LoginProcessor.ProcessGetGroupUser(groupUser);
         }
+
+        //get Post Details
+        [HttpPost]
+        [Route("PostDetails")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object PostDetails(PostDetails postDetails)
+        {
+            if (postDetails == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessPostDetails(postDetails);
+        }
+
+        //get Post Details
+        [HttpPost]
+        [Route("PostPost")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object PostPost(PostPost postPost)
+        {
+            if (postPost == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessPostPost(postPost);
+        }
     }
 }

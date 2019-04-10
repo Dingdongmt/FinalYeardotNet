@@ -29,5 +29,15 @@ namespace FYPWebService.Processors
             return UsersRepsitories.GetGroupUser(groupUser);
         }
 
+        public static object ProcessPostDetails(PostDetails postDetails)
+        {
+            return UsersRepsitories.GetPostDetails(postDetails);
+        }
+
+        public static object ProcessPostPost(PostPost postPost)
+        {
+            return UsersRepsitories.InsertPostPost(postPost);
+        }
+
     }
 }
