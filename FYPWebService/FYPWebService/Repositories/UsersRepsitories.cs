@@ -13,9 +13,9 @@ namespace FYPWebService.Repositories
     {
         public static object ReadLoginToDB(Login login)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
-                " User ID = Q5030168; Password =Ninjamaster1; " +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                "User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
             var query = "SELECT * From loginDetails WHERE UserName = '@Username' AND Password = '@Password'";
@@ -64,8 +64,8 @@ namespace FYPWebService.Repositories
 
         public static object GetProfileDetails(Profile profile)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
@@ -118,17 +118,17 @@ namespace FYPWebService.Repositories
 
         public static object GetSignup(Signup signup)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
 
             var query = "DECLARE @loginid int, @address int, @groupid int" +
-                "INSERT INTO [Login](UserName, Password, Type) VALUES(@UserName, @Password, 1) set @loginid = SCOPE_IDENTITY()" +
-                "INSERT INTO [Address](AddressLine1, AddressLine2, County, Country, PostCode) VALUES(@Address1, @Address2, @County, @Country, @PostCode) set @address = SCOPE_IDENTITY()" +
-                "INSERT INTO [Group](LoginId, AddressId, Name) VALUES(@loginid, @address, @GroupName) set @groupid = SCOPE_IDENTITY()" +
-                "INSERT INTO [User](LoginId, GroupId, Name, Admin, Boi)VALUES(@loginid, @groupid, @Name, 1, @Bio);";
+                "INSERT INTO [Login](UserName, Password, Type) VALUES('@UserName', '@Password', 1) set @loginid = SCOPE_IDENTITY()" +
+                "INSERT INTO [Address](AddressLine1, AddressLine2, County, Country, PostCode) VALUES('@Address1', '@Address2', '@County', '@Country', '@PostCode') set @address = SCOPE_IDENTITY()" +
+                "INSERT INTO [Group](LoginId, AddressId, Name) VALUES('@loginid', '@address', '@GroupName') set @groupid = SCOPE_IDENTITY()" +
+                "INSERT INTO [User](LoginId, GroupId, Name, Admin, Boi)VALUES('@loginid', '@groupid', '@Name', 1, '@Bio');";
 
 
         query = query.Replace("@Name", signup.Name)
@@ -160,8 +160,8 @@ namespace FYPWebService.Repositories
 
         public static object GetGroupUser(GroupUser groupUser)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
@@ -196,8 +196,8 @@ namespace FYPWebService.Repositories
 
         public static object GetPostDetails(PostDetails postDetails)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
@@ -236,8 +236,8 @@ namespace FYPWebService.Repositories
 
         public static object InsertPostPost(PostPost postPost)
         {
-            var connectionString = "Server = tcp:friendlybunch.database.windows.net,1433;" +
-                " Initial Catalog = FPYSQl; Persist Security Info = False;" +
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
@@ -254,6 +254,56 @@ namespace FYPWebService.Repositories
                 command.ExecuteNonQuery();
                 connection.Close();
                 return "True";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static object GetChatInfo(Chat chat)
+        {
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = True; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+            var query = "select * From [chatInfo] WHERE UserId = '@UserId'";
+            query = query.Replace("@UserId", chat.UserId);
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                ArrayList repoArray = new ArrayList();
+                SqlCommand command = new SqlCommand(query, connection);
+                var UserExist = command.ExecuteReader();
+                while (UserExist.Read())
+                {
+                    var ChatId = String.Format("{0}", UserExist[0]);
+                    var UserId = String.Format("{0}", UserExist[1]);
+                    var GroupId = String.Format("{0}", UserExist[2]);
+                    var SenderId = String.Format("{0}", UserExist[3]);
+                    var RecipientId = String.Format("{0}", UserExist[4]);
+                    var Container = String.Format("{0}", UserExist[5]);
+                    var SentTime = String.Format("{0}", UserExist[6]);
+                    var Sender = "";
+                    var Recipient = "";
+
+                    var querygetname = "select Name from [User] where UserId = @Sender union select Name from [User] where UserId = @Reciver";
+                    querygetname = querygetname.Replace("@Sender", SenderId)
+                        .Replace("@Reciver", RecipientId);
+                    SqlCommand command1 = new SqlCommand(querygetname, connection);
+                    var checkname = command1.ExecuteReader();
+                    while (checkname.Read())
+                    {
+                        Sender = String.Format("{0}", checkname[0]);
+                        Recipient = String.Format("{0}", checkname[1]);
+                        object user = new { ChatId, UserId, GroupId, Container, SentTime };
+                        repoArray.Add(user);
+                    }
+                }
+                return repoArray;
             }
             catch (Exception)
             {

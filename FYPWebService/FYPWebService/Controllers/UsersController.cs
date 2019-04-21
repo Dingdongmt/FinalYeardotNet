@@ -89,5 +89,18 @@ namespace FYPWebService.Controllers
             }
             return LoginProcessor.ProcessPostPost(postPost);
         }
+
+        //get Post Details
+        [HttpPost]
+        [Route("ChatInfo")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object GetChatInfo(Chat chat)
+        {
+            if (chat == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessChatInfo(chat);
+        }
     }
 }

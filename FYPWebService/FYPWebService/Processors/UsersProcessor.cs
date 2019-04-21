@@ -39,5 +39,10 @@ namespace FYPWebService.Processors
             return UsersRepsitories.InsertPostPost(postPost);
         }
 
+        public static object ProcessChatInfo(Chat chat)
+        {
+            return UsersRepsitories.GetChatInfo(chat);
+        }
+
     }
 }

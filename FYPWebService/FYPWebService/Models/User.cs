@@ -48,4 +48,9 @@ namespace FYPWebService.Models
         public string UserId { get; set; }
         public string Container { get; set; }
     }
+
+    public class Chat
+    {
+        public string UserId { get; set; }
+    }
 }
