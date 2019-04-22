@@ -37,6 +37,11 @@ namespace FYPWebService.Models
     {
         public string GroupId { get; set; }
     }
+    //get group users caht info
+    public class GroupUserdetail
+    {
+        public string UserId { get; set; }
+    }
     //get group users
     public class PostDetails
     {
@@ -47,6 +52,13 @@ namespace FYPWebService.Models
     {
         public string UserId { get; set; }
         public string Container { get; set; }
+    }
+
+    //delete post
+    public class DeletePost
+    {
+        public string PCId { get; set; }
+        public string PCType { get; set; }
     }
 
     public class Chat

@@ -29,6 +29,11 @@ namespace FYPWebService.Processors
             return UsersRepsitories.GetGroupUser(groupUser);
         }
 
+        public static object ProcessGetGroupUserDetail(GroupUserdetail groupUserdetail)
+        {
+            return UsersRepsitories.GetGroupUserDetail(groupUserdetail);
+        }
+
         public static object ProcessPostDetails(PostDetails postDetails)
         {
             return UsersRepsitories.GetPostDetails(postDetails);
@@ -38,6 +43,12 @@ namespace FYPWebService.Processors
         {
             return UsersRepsitories.InsertPostPost(postPost);
         }
+
+        public static object ProcessDeletePost(DeletePost deletePost)
+        {
+            return UsersRepsitories.DeletePost(deletePost);
+        }
+        
 
         public static object ProcessChatInfo(Chat chat)
         {

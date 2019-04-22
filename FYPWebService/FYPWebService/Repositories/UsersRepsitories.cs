@@ -194,6 +194,37 @@ namespace FYPWebService.Repositories
             }
         }
 
+        public static object GetGroupUserDetail(GroupUserdetail groupUserdetail)
+        {
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+            var query = "SELECT Container, SentTime From[Post] WHERE UserId = '@UserId'  union SELECT Container, SentTime From[Comment] WHERE UserId = '@UserId'";
+            query = query.Replace("@UserId", groupUserdetail.UserId);
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                ArrayList repoArray = new ArrayList();
+                SqlCommand command = new SqlCommand(query, connection);
+                var UserExist = command.ExecuteReader();
+                while (UserExist.Read())
+                {
+                    var Container = String.Format("{0}", UserExist[0]);
+                    var SentTime = String.Format("{0}", UserExist[1]);
+                    object user = new { Container, SentTime };
+                    repoArray.Add(user);
+                }
+                return repoArray;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static object GetPostDetails(PostDetails postDetails)
         {
             var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
@@ -245,6 +276,40 @@ namespace FYPWebService.Repositories
             query = query.Replace("@UserId", postPost.UserId)
                 .Replace("@Container", postPost.Container);
 
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                // Check Error
+                command.ExecuteNonQuery();
+                connection.Close();
+                return "True";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static object DeletePost(DeletePost deletepost)
+        {
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+            var query = "";
+            if(deletepost.PCType == "Post")
+            {
+                query = "DELETE FROM[Post] WHERE PostId = '@PCId'";
+                query = query.Replace("@PCId", deletepost.PCId);
+            } else
+            {
+                query = "DELETE FROM[Comment] WHERE PostId = '@PCId'";
+                query = query.Replace("@PCId", deletepost.PCId);
+            }
+            
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {

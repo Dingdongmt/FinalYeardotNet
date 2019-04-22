@@ -64,6 +64,19 @@ namespace FYPWebService.Controllers
             return LoginProcessor.ProcessGetGroupUser(groupUser);
         }
 
+        //get Group user detail
+        [HttpPost]
+        [Route("GroupUserDetail")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object groupUserdetail(GroupUserdetail groupUserdetail)
+        {
+            if (groupUserdetail == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessGetGroupUserDetail(groupUserdetail);
+        }
+
         //get Post Details
         [HttpPost]
         [Route("PostDetails")]
@@ -77,7 +90,7 @@ namespace FYPWebService.Controllers
             return LoginProcessor.ProcessPostDetails(postDetails);
         }
 
-        //get Post Details
+        //Post Post
         [HttpPost]
         [Route("PostPost")]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -88,6 +101,19 @@ namespace FYPWebService.Controllers
                 return "false";
             }
             return LoginProcessor.ProcessPostPost(postPost);
+        }
+
+        //Delete Post
+        [HttpPost]
+        [Route("DeletePost")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object DeletePost(DeletePost deletePost)
+        {
+            if (deletePost == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessDeletePost(deletePost);
         }
 
         //get Post Details
