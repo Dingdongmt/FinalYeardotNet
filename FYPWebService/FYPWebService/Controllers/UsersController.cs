@@ -90,6 +90,15 @@ namespace FYPWebService.Controllers
             return LoginProcessor.ProcessPostDetails(postDetails);
         }
 
+        //get filtered words
+        [HttpGet]
+        [Route("GetFilters")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object GetFilters(Filters filters)
+        {
+            return LoginProcessor.ProcessGetFilters(filters);
+        }
+
         //Post Post
         [HttpPost]
         [Route("PostPost")]
@@ -116,6 +125,20 @@ namespace FYPWebService.Controllers
             return LoginProcessor.ProcessDeletePost(deletePost);
         }
 
+        //Delete Post
+        [HttpPost]
+        [Route("ReportPost")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object ReportPost(ReportPost reportPost)
+        {
+            if (reportPost == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessReportPost(reportPost);
+        }
+
+        
         //get Post Details
         [HttpPost]
         [Route("ChatInfo")]

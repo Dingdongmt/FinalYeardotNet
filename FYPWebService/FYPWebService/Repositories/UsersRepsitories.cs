@@ -292,6 +292,40 @@ namespace FYPWebService.Repositories
             }
         }
 
+        public static object GetFilters(Filters filters)
+        {
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+
+            var query = "SELECT * FROM [Reported]";
+
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                ArrayList repoArray = new ArrayList();
+                SqlCommand command = new SqlCommand(query, connection);
+                var UserExist = command.ExecuteReader();
+                while (UserExist.Read())
+                {
+                    var Total = UserExist.GetInt32(0);
+                    var Word = String.Format("{0}", UserExist[1]);
+                    if (Total >= 5)
+                    {
+                        repoArray.Add(Word);
+                    }
+                }
+                return repoArray;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static object DeletePost(DeletePost deletepost)
         {
             var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
@@ -310,6 +344,33 @@ namespace FYPWebService.Repositories
                 query = query.Replace("@PCId", deletepost.PCId);
             }
             
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                // Check Error
+                command.ExecuteNonQuery();
+                connection.Close();
+                return "True";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static object ReportPost(ReportPost reportPost)
+        {
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+                "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
+                " User ID = Q5030168; Password =Ninjamaster1; " +
+                "MultipleActiveResultSets = False; Encrypt = True; " +
+                "TrustServerCertificate = False; Connection Timeout = 30";
+
+            var query = "INSERT INTO [Censor](Word) VALUES('@PCId')";
+                query = query.Replace("@PCId", reportPost.BadWord);
+
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {

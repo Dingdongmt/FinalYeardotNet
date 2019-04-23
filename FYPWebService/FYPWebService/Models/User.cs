@@ -47,6 +47,13 @@ namespace FYPWebService.Models
     {
         public string GroupId { get; set; }
     }
+
+    //get banned words
+    public class Filters
+    {
+        public string filters { get; set; }
+    }
+
     //get post
     public class PostPost
     {
@@ -59,6 +66,12 @@ namespace FYPWebService.Models
     {
         public string PCId { get; set; }
         public string PCType { get; set; }
+    }
+
+    //Report post
+    public class ReportPost
+    {
+        public string BadWord { get; set; }
     }
 
     public class Chat

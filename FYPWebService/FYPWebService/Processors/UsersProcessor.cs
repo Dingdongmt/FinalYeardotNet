@@ -39,6 +39,11 @@ namespace FYPWebService.Processors
             return UsersRepsitories.GetPostDetails(postDetails);
         }
 
+        public static object ProcessGetFilters(Filters filters)
+        {
+            return UsersRepsitories.GetFilters(filters);
+        }
+
         public static object ProcessPostPost(PostPost postPost)
         {
             return UsersRepsitories.InsertPostPost(postPost);
@@ -48,8 +53,12 @@ namespace FYPWebService.Processors
         {
             return UsersRepsitories.DeletePost(deletePost);
         }
-        
 
+        public static object ProcessReportPost(ReportPost reportPost)
+        {
+            return UsersRepsitories.ReportPost(reportPost);
+        }
+        
         public static object ProcessChatInfo(Chat chat)
         {
             return UsersRepsitories.GetChatInfo(chat);
