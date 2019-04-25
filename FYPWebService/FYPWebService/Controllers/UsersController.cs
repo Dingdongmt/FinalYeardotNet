@@ -38,6 +38,19 @@ namespace FYPWebService.Controllers
             return LoginProcessor.ProcessProfile(profile);
         }
 
+        //get profile details
+        [HttpPost]
+        [Route("UpdateProfile")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object UpProfile(UpProfile upProfile)
+        {
+            if (upProfile == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessUpdateProfile(upProfile);
+        }
+
         //get signup details
         [HttpPost]
         [Route("Signup")]
@@ -49,6 +62,19 @@ namespace FYPWebService.Controllers
                 return "false";
             }
             return LoginProcessor.ProcessSignin(signup);
+        }
+
+        //get signup details
+        [HttpPost]
+        [Route("AddUser")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object AddUser(AddUser addUser)
+        {
+            if (addUser == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessAddUsers(addUser);
         }
 
         //get Group Users
@@ -92,6 +118,15 @@ namespace FYPWebService.Controllers
 
         //get filtered words
         [HttpGet]
+        [Route("GetPostInfo")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object GetPostinfo(Postinfo postinfo)
+        {
+            return LoginProcessor.ProcessGetPostInfo(postinfo);
+        }
+
+        //get filtered words
+        [HttpGet]
         [Route("GetFilters")]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object GetFilters(Filters filters)
@@ -110,6 +145,19 @@ namespace FYPWebService.Controllers
                 return "false";
             }
             return LoginProcessor.ProcessPostPost(postPost);
+        }
+
+        //Comment on a Post
+        [HttpPost]
+        [Route("PostComment")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object PostComment(PostComment postComment)
+        {
+            if (postComment == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessPostComment(postComment);
         }
 
         //Delete Post
@@ -139,7 +187,7 @@ namespace FYPWebService.Controllers
         }
 
         
-        //get Post Details
+        //get chat Details
         [HttpPost]
         [Route("ChatInfo")]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -150,6 +198,28 @@ namespace FYPWebService.Controllers
                 return "false";
             }
             return LoginProcessor.ProcessChatInfo(chat);
+        }
+
+        //get Chat info
+        [HttpGet]
+        [Route("GetChat")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object GetChatInfo(ChatInfo chatInfo)
+        {
+            return LoginProcessor.ProcessChat(chatInfo);
+        }
+
+        //Post Message
+        [HttpPost]
+        [Route("Message")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public object GetMessage(Message message)
+        {
+            if (message == null)
+            {
+                return "false";
+            }
+            return LoginProcessor.ProcessPostMessage(message);
         }
     }
 }

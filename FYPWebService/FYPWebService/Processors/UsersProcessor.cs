@@ -18,10 +18,20 @@ namespace FYPWebService.Processors
         {
             return UsersRepsitories.GetProfileDetails(profile);
         }
+        
+        public static object ProcessUpdateProfile(UpProfile upProfile)
+        {
+            return UsersRepsitories.UpdateProfile(upProfile);
+        }
 
         public static object ProcessSignin(Signup signup)
         {
             return UsersRepsitories.GetSignup(signup);
+        }
+
+        public static object ProcessAddUsers(AddUser addUser)
+        {
+            return UsersRepsitories.AddUsers(addUser);
         }
 
         public static object ProcessGetGroupUser(GroupUser groupUser)
@@ -39,6 +49,11 @@ namespace FYPWebService.Processors
             return UsersRepsitories.GetPostDetails(postDetails);
         }
 
+        public static object ProcessGetPostInfo(Postinfo postinfo)
+        {
+            return UsersRepsitories.GetPostinfo(postinfo);
+        }
+
         public static object ProcessGetFilters(Filters filters)
         {
             return UsersRepsitories.GetFilters(filters);
@@ -47,6 +62,11 @@ namespace FYPWebService.Processors
         public static object ProcessPostPost(PostPost postPost)
         {
             return UsersRepsitories.InsertPostPost(postPost);
+        }
+
+        public static object ProcessPostComment(PostComment postComment)
+        {
+            return UsersRepsitories.InsertComment(postComment);
         }
 
         public static object ProcessDeletePost(DeletePost deletePost)
@@ -58,10 +78,19 @@ namespace FYPWebService.Processors
         {
             return UsersRepsitories.ReportPost(reportPost);
         }
-        
+
+        public static object ProcessChat(ChatInfo chatInfo)
+        {
+            return UsersRepsitories.GetChat(chatInfo);
+        }
+
         public static object ProcessChatInfo(Chat chat)
         {
             return UsersRepsitories.GetChatInfo(chat);
+        }
+        public static object ProcessPostMessage(Message message)
+        {
+            return UsersRepsitories.Postchat(message);
         }
 
     }
