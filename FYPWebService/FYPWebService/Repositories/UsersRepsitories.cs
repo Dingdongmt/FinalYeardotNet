@@ -482,7 +482,7 @@ namespace FYPWebService.Repositories
                 query = query.Replace("@PCId", deletepost.PCId);
             } else
             {
-                query = "DELETE FROM[Comment] WHERE PostId = '@PCId'";
+                query = "DELETE FROM[Comment] WHERE CommentId = '@PCId'";
                 query = query.Replace("@PCId", deletepost.PCId);
             }
             
