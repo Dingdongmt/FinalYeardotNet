@@ -44,7 +44,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object UpProfile(UpProfile upProfile)
         {
-            if (upProfile == null)
+            if (upProfile.UserId == null && upProfile.GroupId == null && upProfile.AddressId == null && upProfile.LoginId == null && upProfile.Name == null && upProfile.UserName == null && upProfile.Password == null && upProfile.GroupName == null && upProfile.Address1 == null && upProfile.County == null && upProfile.Country == null && upProfile.PostCode == null)
             {
                 return "false";
             }
@@ -57,7 +57,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object Signup(Signup signup)
         {
-            if (signup == null)
+            if (signup.Name == null && signup.UserName == null && signup.Password == null && signup.GroupName == null && signup.Address1 == null && signup.County == null && signup.Country == null && signup.PostCode == null)
             {
                 return "false";
             }
@@ -70,7 +70,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object AddUser(AddUser addUser)
         {
-            if (addUser == null)
+            if (addUser.Name == null && addUser.UserName == null && addUser.Password == null && addUser.GroupId == null)
             {
                 return "false";
             }
@@ -140,7 +140,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object PostPost(PostPost postPost)
         {
-            if (postPost == null)
+            if (postPost.UserId == null && postPost.Container == null)
             {
                 return "false";
             }
@@ -153,7 +153,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object PostComment(PostComment postComment)
         {
-            if (postComment == null)
+            if (postComment.UserId == null && postComment.Container == null && postComment.PostId == null)
             {
                 return "false";
             }
@@ -215,7 +215,7 @@ namespace FYPWebService.Controllers
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         public object GetMessage(Message message)
         {
-            if (message == null)
+            if (message.UserId == null && message.RecipientId == null && message.Container == null)
             {
                 return "false";
             }
