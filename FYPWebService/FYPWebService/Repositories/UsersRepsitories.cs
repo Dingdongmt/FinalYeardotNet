@@ -436,26 +436,26 @@ namespace FYPWebService.Repositories
 
         public static object GetFilters(Filters filters)
         {
+            //connection sting to the datebase
             var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
                 "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
-
+            //The querry set to the SQL 
             var query = "SELECT * FROM [Reported]";
-
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                connection.Open();
-                ArrayList repoArray = new ArrayList();
+                connection.Open(); //open connection so the connectionstring runs and the following query is applied 
+                ArrayList repoArray = new ArrayList(); //created an array to send to the frontend
                 SqlCommand command = new SqlCommand(query, connection);
-                var UserExist = command.ExecuteReader();
+                var UserExist = command.ExecuteReader(); //readed excituted so the value retured via opening the connection is read
                 while (UserExist.Read())
                 {
-                    var Total = UserExist.GetInt32(0);
-                    var Word = String.Format("{0}", UserExist[1]);
-                    if (Total >= 5)
+                    var Total = UserExist.GetInt32(0); // total count of words is returned
+                    var Word = String.Format("{0}", UserExist[1]); // the actual word is returned 
+                    if (Total >= 5) // if the total of work being reported is more or equal to 5 send to frontend
                     {
                         repoArray.Add(Word);
                     }
@@ -504,24 +504,25 @@ namespace FYPWebService.Repositories
 
         public static object ReportPost(ReportPost reportPost)
         {
-            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " +
+            //connection sting to the datebase
+            var connectionString = "Server = tcp:fypbunch.database.windows.net,1433; " + 
                 "Initial Catalog = FYPFriendly; Persist Security Info = False; " +
                 " User ID = Q5030168; Password =Ninjamaster1; " +
                 "MultipleActiveResultSets = False; Encrypt = True; " +
                 "TrustServerCertificate = False; Connection Timeout = 30";
-
+            //The querry set to the SQL 
             var query = "INSERT INTO [Censor](Word) VALUES('@PCId')";
                 query = query.Replace("@PCId", reportPost.BadWord);
 
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                connection.Open();
+                connection.Open();//open connection so the connectionstring runs and the following query is applied
                 SqlCommand command = new SqlCommand(query, connection);
                 // Check Error
                 command.ExecuteNonQuery();
                 connection.Close();
-                return "True";
+                return "True";// return on success
             }
             catch (Exception)
             {
